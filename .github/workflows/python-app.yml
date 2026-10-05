@@ -1,10 +1,12 @@
+```yaml
 name: Python CI
 
-# Trigger the workflow on any push to the main branch or pull request
+# Run the workflow on pushes and pull requests targeting main
 on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
@@ -14,15 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the code from the repository
-      - name: Check out code
-        uses: actions/checkout@v2
 
-      # Step 2: Set up Python environment
+      # Step 1: Check out repository code
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: "3.12"
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -30,6 +33,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests
+      # Step 4: Run automated tests
       - name: Run tests
-        run: pytest
+        run: pytest -v
+        env:
+          PYTHONPATH: .
+```
