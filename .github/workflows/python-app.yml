@@ -1,4 +1,4 @@
-```yaml
+
 name: Python CI
 
 # Run the workflow on pushes and pull requests targeting main
@@ -38,4 +38,4 @@ jobs:
         run: pytest -v
         env:
           PYTHONPATH: .
-```
+
